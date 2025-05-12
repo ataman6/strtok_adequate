@@ -13,13 +13,12 @@ int main(int argc, char *argv[])
 	const char *str = argv[1];
 	int len = strlen(str);
 
-	/* set both to zero */
-	unsigned long token_off = 0, token_len = 0;
+	struct strtok_adequate_arg t = { str, len, ",;", 0, 0 };
 	int total = 0;
 
 	printf("tokens:");
-	while(strtok_adequate(str, len, &token_off, &token_len, ",;")) {
-		printf(" %.*s", (unsigned int) token_len, &str[token_off]);
+	while(strtok_adequate_arg(&t)) {
+		printf(" %.*s", (unsigned int) t.tlen, &str[t.toff]);
 		++total;
 	}
 	printf("\n%i total\n", total);

@@ -64,4 +64,26 @@ static inline int strtok_adequate(
 	return 1;
 }
 
+struct strtok_adequate_arg {
+	const char *str;
+	unsigned long len;
+	/* null-terminator is not included */
+	const char *delim;
+	unsigned long toff;
+	unsigned long tlen;
+};
+
+static inline int strtok_adequate_arg(
+	struct strtok_adequate_arg *arg
+)
+{
+	return strtok_adequate(
+		arg->str,
+		arg->len,
+		&arg->toff,
+		&arg->tlen,
+		arg->delim
+	);
+}
+
 #endif /* STRTOK_ADEQUATE_H_ */
